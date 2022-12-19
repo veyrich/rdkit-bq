@@ -77,18 +77,11 @@ Create a function by runnig the following query (via the console or bq):
           endpoint = 'https://mw-pfzsq5qisa-uc.a.run.app'
         )
 
-When using the bq command line tool it can helpful to save the query to a file, e.g. query.sql and the run:
+When using the bq command line tool it can helpful to save the query to a file, e.g. query.sql, and then run:
 
         bq query --use_legacy_sql=false < query.sql
-        
-Where query.sql contains:
 
-        CREATE FUNCTION `rdkitbq.smiles`.mw(smi STRING) RETURNS Numeric
-        REMOTE WITH CONNECTION `rdkitbq.us-central1.mw`
-        OPTIONS (
-          endpoint = 'https://mw-pfzsq5qisa-uc.a.run.app'
-        )
-        
+
 ## Test the function
 
 Run a simple query that invokes the mw() function:
