@@ -87,8 +87,41 @@ When using the bq command line tool it can helpful to save the query to a file, 
 Run a simple query that invokes the mw() function:
         
         bq query --use_legacy_sql=false "select rdkitbq.smiles.mw('CC') as mw"
+        
         +--------------+
         |      mw      |
         +--------------+
         | 30.046950192 |
         +--------------+
+
+Assuming one has a table called 'sample' that contains SMILES strings:
+
+        bq query --use_legacy_sql=false "select smiles, rdkitbq.smiles.mw(smiles) as mw from rdkitbq.smiles.sample"
+        
+        +--------------------------+---------------+
+        |          smiles          |      mw       |
+        +--------------------------+---------------+
+        | c1ccccc1                 |  78.046950192 |
+        | CC(=O)OC1=CC=CC=C1C(=O)O | 180.042258736 |
+        | CC1=CC=CC=C1             |  92.062600256 |
+        | CC                       |  30.046950192 |
+        | CCO                      |  46.041864812 |
+        +--------------------------+---------------+
+
+Use mw() when filtering and sorting:
+
+        bq query --use_legacy_sql=false \
+        "select smiles, rdkitbq.smiles.mw(smiles) as mw \
+        from rdkitbq.smiles.sample \
+        where rdkitbq.smiles.mw(smiles) < 100 \
+        order by rdkitbq.smiles.mw(smiles)"
+        
+        +--------------+--------------+
+        |    smiles    |      mw      |
+        +--------------+--------------+
+        | CC           | 30.046950192 |
+        | CCO          | 46.041864812 |
+        | c1ccccc1     | 78.046950192 |
+        | CC1=CC=CC=C1 | 92.062600256 |
+        +--------------+--------------+
+
