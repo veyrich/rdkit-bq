@@ -7,3 +7,6 @@ Outlined below is an approach for integrating RDKit with BQ. Since RDKit relies 
 
 
 For the sake of simplicity, the code described here only makes available a fairly simplistic RDKit descriptor / property via BQ, i.e. molecular weight. The overall approach is extensible though and more sophisticated transformations can be implemented.
+
+
+See [README.md](https://github.com/veyrich/rdkit-bq/blob/main/demo/mw/README.md) for details on how to deploy the demo.
