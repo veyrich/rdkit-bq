@@ -1,5 +1,6 @@
-#Outline of the implementation strategy
+# Outline of the implementation strategy
 
+The deployment workflow for the solution involves the following steps:
 
 - Build a Cloud Run service that exposes the relevant RDKit functionality
 - Create a BiqQuery connection
